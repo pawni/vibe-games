@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --base:#111d17; --panel:#1a2a21; --line:#334439; --text:#f0ebd9;
+  --muted:#aab9a8; --green:#c2dd83; --gold:#e3bf74; --headline:Fraunces, Georgia, serif;
+  font-family:"DM Sans", system-ui, sans-serif;
+  background:var(--base); color:var(--text);
+}
+* {box-sizing:border-box}
+body {margin:0; min-height:100vh; background:radial-gradient(ellipse at 28% 5%,#203324 0,transparent 52%),var(--base)}
+button {font:inherit; cursor:pointer}
+button:focus-visible {outline:2px solid #ffe59d; outline-offset:3px}
+button:disabled {cursor:default}
+[hidden] {display:none!important}
+.top {border-bottom:1px solid #344538; background:#121f18e8}
+.top-inner {max-width:1320px; margin:auto; padding:14px 34px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+.brand,.utility {display:flex; align-items:center; gap:12px}
+.brand-icon {width:43px; height:43px; border:1px solid #647349; border-radius:12px; color:#e7d289; background:radial-gradient(circle,#4e6338,#283e28); box-shadow:inset 0 0 0 3px #253b29; display:grid; place-items:center; font-size:27px}
+.brand h1 {font:600 1.65rem/1 var(--headline); margin:0; letter-spacing:-.035em}
+.brand p,.eyebrow,.metric small,.inspector-title,#field-state {letter-spacing:.13em; font-size:.75rem; font-weight:700}
+.brand p {margin:5px 0 0; color:#c0ccad; font-size:.63rem}
+.quiet,.icon-btn,.secondary {border:1px solid #415547; background:#23342a; color:var(--text); border-radius:8px; min-height:39px; font-weight:700}
+.quiet {padding:0 12px; display:flex; gap:8px; align-items:center; font-size:.875rem}
+.quiet span {border:1px solid #818d79; color:#e3e9d8; border-radius:50%; width:17px; height:17px; text-align:center; font-size:.68rem; line-height:15px}
+.icon-btn {width:39px; font-size:1.3rem}
+.quiet:hover,.icon-btn:hover,.secondary:hover {background:#304737}
+main {max-width:1320px; margin:auto; padding:24px 34px 14px}
+.mission {display:flex; justify-content:space-between; align-items:end; gap:12px; margin:0 0 18px}
+.eyebrow {margin:0 0 6px; color:#c4d392; display:flex; gap:8px; align-items:center}
+.eyebrow i {width:7px; height:7px; background:#c5d98b; transform:rotate(45deg); display:inline-block}
+.mission h2 {font:600 clamp(2.25rem,4vw,3.45rem)/1.03 var(--headline); letter-spacing:-.055em; margin:0}
+.status {margin-bottom:3px; display:flex; align-items:center; gap:8px; color:#e4c781; background:#343322; border:1px solid #635737; padding:7px 11px; border-radius:30px; font-size:.83rem; font-weight:700; white-space:nowrap}
+.status i {width:7px;height:7px;background:#e9c56a;border-radius:100%;box-shadow:0 0 9px #e5be6060}
+.status.live {color:#c7e89c; background:#283b22; border-color:#567245}
+.status.live i {background:#b8e675}
+.hud {display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid var(--line); border-radius:12px; background:#1a2a21; margin:0 0 15px}
+.metric {display:flex; align-items:center; gap:11px; padding:11px 17px; min-width:0}
+.metric+.metric {border-left:1px solid var(--line)}
+.metric-icon {flex:0 0 37px; height:37px; border-radius:9px; display:grid; place-items:center; font-size:1.2rem; border:1px solid #ffffff13}
+.metric-icon.gold,.note-icon {color:#f0d28e;background:#3b3928}
+.metric-icon.rose {color:#f2a49b;background:#432f2d}
+.metric-icon.lime {color:#d0e699;background:#34462b}
+.metric-icon.orange {color:#e9b780;background:#41362a}
+.metric small {display:block; color:var(--muted); white-space:nowrap; margin-bottom:2px}
+.metric strong {font-size:1.2rem; line-height:1; font-variant-numeric:tabular-nums}
+.metric em {font-size:.83rem; font-style:normal; color:var(--muted); font-weight:500}
+.game-grid {display:grid; grid-template-columns:minmax(0,1fr) 286px; gap:15px; align-items:stretch}
+.field,.inspector,.controls {border:1px solid var(--line); border-radius:12px; background:var(--panel); overflow:hidden; box-shadow:0 4px 16px #07110c35}
+.field-header {height:40px; display:flex; gap:12px; align-items:center; justify-content:space-between; padding:0 13px; font-size:.9rem; font-weight:700}
+.field-dot {color:#d6de9a; margin-right:6px}
+#field-state {color:#c4cfae; text-align:right}
+#arena {position:relative; aspect-ratio:900/510; overflow:hidden; isolation:isolate; background:radial-gradient(ellipse,#789446,#49672e 95%); touch-action:pan-y}
+#board,#units {position:absolute; inset:0; width:100%; height:100%; display:block}
+#units {z-index:2; pointer-events:none}
+.unit {position:absolute; z-index:1; pointer-events:auto; padding:0; border:0; transform:translate(-50%,-58%); width:8.6%; height:16%; background:transparent; border-radius:50%; touch-action:none}
+.unit:focus-visible {outline-offset:0}
+.unit.merge-target {outline:2px dashed #e4ffac; outline-offset:-3px}
+.placement {position:absolute; pointer-events:auto; width:6.1%; height:9.3%; transform:translate(-50%,-50%); border:1px dashed #e6f0a6a6; border-radius:8px; background:#27332152; color:#eff6bf; font-weight:700; line-height:1; padding:0; touch-action:none}
+.placement:hover,.placement:focus-visible {background:#516f38ec; border-color:#f0f7bc}
+.map-label {position:absolute; color:#ffecbc; background:#26351de6; border:1px solid #c9c38180; padding:3px 7px; border-radius:4px; font-size:clamp(.5rem,1vw,.65rem); font-weight:700; letter-spacing:.13em; pointer-events:none; z-index:1}
+.entrance {left:3%; top:33%}
+.exit {right:2.5%; top:78%}
+.legend {display:flex; align-items:center; min-height:41px; gap:18px; padding:6px 13px; color:#bfcdbd; font-size:.82rem; flex-wrap:wrap}
+.legend span {display:flex; gap:7px; align-items:center}
+.legend-mark {width:11px; height:11px; border-radius:3px; border:1px solid #f4ffbd60}
+.legend-mark.active {background:#a2c657}
+.legend-mark.cage {background:#82adcd}
+.legend-mark.enemy {background:#e4ba69}
+.legend-mark.pad {border:1px dashed #dae3a5; background:none}
+.inspector {padding:16px; display:flex; flex-direction:column; gap:13px}
+.inspector-title {color:#bfcdba; display:flex; align-items:center; gap:7px}
+.inspector-title span {color:#d3df9c; font-size:1rem; line-height:.8}
+.tower-card,.forge {background:#21332a; border:1px solid #3b5142; border-radius:10px; padding:12px}
+.tower-id {display:flex; gap:11px; align-items:center}
+.portrait {width:59px; height:59px; flex:0 0 59px; border-radius:9px; border:1px solid #607143; background:radial-gradient(circle at 45% 30%,#637544,#333f29 75%)}
+.tower-id h3,.forge h3,.run-note h3 {font:600 1.22rem/1.1 var(--headline); margin:0 0 4px}
+.tower-id p,.forge p,.run-note p {margin:0; color:var(--muted); font-size:.84rem; line-height:1.42}
+.tower-card dl {margin:12px 0; display:grid; grid-template-columns:1fr 1fr; gap:7px}
+.tower-card dl div {background:#192a21; padding:7px 8px; border-radius:6px; border:1px solid #344b3b}
+.tower-card dt {font-size:.74rem; color:#bac7b5}
+.tower-card dd {margin:2px 0 0; font-size:.95rem; font-weight:700}
+.growth {font-size:.77rem; color:#c3dd9d; margin:0 0 10px}
+.move-hint {font-size:.77rem; line-height:1.4; color:var(--muted); margin:8px 0 0}
+.secondary {padding:0 12px; font-size:.86rem}
+.tower-card button,.forge button {width:100%}
+.secondary.merge:not(:disabled) {color:#e9f4cd; border-color:#6b8751; background:#3a512e}
+.secondary.merge:not(:disabled):hover {background:#4b6539}
+button:disabled {opacity:.55}
+.forge {margin-top:auto}
+.forge-heading {display:flex; align-items:center; gap:9px}
+.forge-icon {display:grid; place-items:center; flex:0 0 35px; height:35px; border-radius:8px; color:#eace87; background:#423d2c; border:1px solid #665b3b}
+.forge h3 {font-size:1.07rem}
+.pips {display:flex; gap:5px; margin:10px 0 7px}
+.pips i {background:#344639; height:5px; border-radius:10px; flex:1}
+.pips i.filled {background:#e1c26b}
+#offer {margin-top:8px}
+.controls {min-height:69px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center; gap:12px; margin:14px 0 0}
+.run-note,.run-buttons {display:flex; align-items:center; gap:10px}
+.note-icon {width:40px;height:40px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;font-size:1.23rem}
+.run-note h3 {font-size:1.08rem}
+.speed {min-width:46px; padding:0 9px}
+.primary {background:#c8df8b; color:#25321a; padding:0 15px; min-height:39px; border:1px solid #e2edb2; border-radius:8px; box-shadow:inset 0 -2px 0 #8ca757; font-size:.9rem; font-weight:800; white-space:nowrap}
+.primary:hover {background:#def0ac}
+.primary span {font-size:.75em; margin-right:4px}
+.announcement {min-height:1em;color:#e2d29b;margin:7px 1px 0;font-size:.85rem}
+dialog {width:min(540px,calc(100% - 24px)); max-height:90vh; overflow:auto; color:var(--text); background:#1d3025; border:1px solid #627857; border-radius:15px; padding:21px; box-shadow:0 15px 65px #07120cd9}
+dialog::backdrop {background:#09120dd1}
+dialog h2 {font:600 2rem/1.1 var(--headline); margin:0 0 10px}
+dialog p,dialog li {line-height:1.45; color:#c9d6c7}
+dialog li+li {margin-top:7px}
+.dialog-actions {display:flex; gap:9px; justify-content:flex-end; margin-top:15px}
+.offer-list {display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.offer-choice {text-align:left; background:#263c2c; color:var(--text); border:1px solid #688351; padding:12px; border-radius:9px}
+.offer-choice.risk {background:#3e3229; border-color:#9a704b}
+.offer-choice:hover {filter:brightness(1.18)}
+.offer-choice strong,.offer-choice span {display:block}
+.offer-choice strong {font:600 1.18rem var(--headline); margin:4px 0}
+.offer-choice small {text-transform:uppercase; font-size:.72rem; letter-spacing:.08em; color:#deebbb}
+.offer-choice.risk small {color:#f5c796}
+@media(max-width:1000px) {
+  main,.top-inner {padding-left:22px;padding-right:22px}
+  .game-grid {grid-template-columns:minmax(0,1fr) 245px; gap:10px}
+  .inspector {padding:11px;gap:8px}
+  .tower-card,.forge {padding:9px}
+}
+@media(max-width:810px) {
+  .game-grid {grid-template-columns:1fr}
+  .inspector {display:grid;grid-template-columns:1fr 1fr; gap:8px}
+  .inspector-title {grid-column:1/-1}
+  .forge {margin-top:0}
+}
+@media(max-width:520px) {
+  main,.top-inner {padding-left:11px;padding-right:11px}
+  main {padding-top:17px}
+  .top-inner {padding-top:10px;padding-bottom:10px}
+  .brand-icon {width:35px;height:35px;font-size:22px}
+  .brand {gap:7px}
+  .brand h1 {font-size:1.32rem}
+  .brand p {font-size:.51rem}
+  .utility {gap:4px}
+  .quiet {padding:0 5px;font-size:.74rem}
+  .quiet span {display:none}
+  .icon-btn {width:29px}
+  .hud {grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:9px}
+  .metric {padding:6px 9px}
+  .metric:nth-child(3) {border-left:0}
+  .metric:nth-child(n+3) {border-top:1px solid var(--line)}
+  .metric-icon {flex-basis:28px;height:28px}
+  .metric strong {font-size:1rem}
+  .mission {margin-bottom:13px}
+  .mission h2 {font-size:1.92rem}
+  #field-state {font-size:.63rem}
+  .legend {gap:9px;padding:5px 7px;font-size:.69rem}
+  .legend span {gap:4px}
+  .inspector {padding:8px}
+  .tower-id {gap:5px}
+  .portrait {width:37px;height:37px;flex-basis:37px}
+  .tower-id h3 {font-size:1.04rem}
+  .tower-card dt,.growth {font-size:.68rem}
+  .controls {align-items:stretch; flex-direction:column; margin-top:9px}
+  .run-buttons .primary {flex:1}
+}

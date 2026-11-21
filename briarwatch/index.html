@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111d17">
+  <meta name="description" content="Rescue woodland guardians, merge matching towers, and defend the grove.">
+  <title>Briarwatch · Woodland Tower Defense</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="engine.js" defer></script>
+  <script src="art.js" defer></script>
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <div><h1>Briarwatch</h1><p>WOODLAND TOWER DEFENSE</p></div>
+      </div>
+      <div class="utility">
+        <button id="help" class="quiet"><span aria-hidden="true">?</span> How to play</button>
+        <button id="reset" class="icon-btn" aria-label="Restart run" title="Restart run">↻</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="mission">
+      <div><p class="eyebrow"><i></i> THE BRIARWOOD</p><h2>Defend the grove</h2></div>
+      <div class="status" id="status-badge"><i></i><span>Preparation</span></div>
+    </div>
+    <section class="hud" aria-label="Run stats">
+      <div class="metric"><span class="metric-icon gold" aria-hidden="true">⚑</span><div><small>THREAT LEVEL</small><strong id="threat">01</strong></div></div>
+      <div class="metric"><span class="metric-icon rose" aria-hidden="true">♥</span><div><small>GROVE HEALTH</small><strong id="health">12 <em>/ 12</em></strong></div></div>
+      <div class="metric"><span class="metric-icon lime" aria-hidden="true">✿</span><div><small>RESCUED</small><strong id="rescued">0</strong></div></div>
+      <div class="metric"><span class="metric-icon orange" aria-hidden="true">✦</span><div><small>MONSTERS SLAIN</small><strong id="kills">0</strong></div></div>
+    </section>
+    <div class="game-grid">
+      <section class="field" aria-label="Battlefield">
+        <div class="field-header"><div><span class="field-dot" aria-hidden="true">✧</span> Fern Hollow</div><span id="field-state">SWARM INCOMING</span></div>
+        <div id="arena">
+          <canvas id="board" width="900" height="510" aria-hidden="true"></canvas>
+          <div id="units" aria-label="Towers, captives, and placement tiles"></div>
+          <span class="map-label entrance">THICKET</span>
+          <span class="map-label exit">GROVE</span>
+        </div>
+        <div class="legend">
+          <span><i class="legend-mark active"></i> Active tower</span>
+          <span><i class="legend-mark cage"></i> Trapped tower</span>
+          <span><i class="legend-mark enemy"></i> Enemy trail</span>
+          <span><i class="legend-mark pad"></i> Open tile</span>
+        </div>
+      </section>
+      <aside class="inspector" aria-label="Selected tower and merge workshop">
+        <div class="inspector-title"><span aria-hidden="true">◇</span> TOWER WORKSHOP</div>
+        <section id="tower-details" aria-live="polite"></section>
+        <section class="forge">
+          <div class="forge-heading"><div class="forge-icon" aria-hidden="true">✦</div><div><h3>Ascension</h3><p id="merge-caption">0 / 3 merges</p></div></div>
+          <div class="pips" id="pips" aria-hidden="true"><i></i><i></i><i></i></div>
+          <p id="forge-hint">Every 3 merges unlock a choice of special upgrades.</p>
+          <button id="offer" class="secondary" hidden>View upgrades</button>
+        </section>
+      </aside>
+    </div>
+    <section class="controls" aria-label="Run controls">
+      <div class="run-note">
+        <span class="note-icon" aria-hidden="true">⚔</span>
+        <div><h3 id="run-heading">Survive the swarm</h3><p id="run-copy">Place your towers and hold the trail against a continuous swarm.</p></div>
+      </div>
+      <div class="run-buttons">
+        <button id="speed" class="secondary speed" aria-label="Change game speed">1×</button>
+        <button id="start" class="primary"><span aria-hidden="true">▶</span> Start run</button>
+      </div>
+    </section>
+    <p class="announcement" id="announcement" role="status"></p>
+  </main>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-inner"></div></dialog>
+</body>
+</html>
